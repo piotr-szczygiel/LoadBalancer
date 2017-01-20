@@ -4,6 +4,7 @@ namespace LoadBalancer;
 use LoadBalancer\Exception\LoadBalancerException;
 use LoadBalancer\Host\HostInterface;
 use LoadBalancer\Http\RequestInterface;
+use LoadBalancer\LoadVariant\LoadVariantInterface;
 use LoadBalancer\LoadVariant\VariantFactory;
 
 /**
@@ -18,9 +19,9 @@ class LoadBalancer implements LoadBalancerInterface
     private $hosts;
 
     /**
-     * @var string
+     * @var LoadVariantInterface
      */
-    private $variantType;
+    private $variant;
 
     /**
      * LoadBalancer constructor.
@@ -31,7 +32,7 @@ class LoadBalancer implements LoadBalancerInterface
     public function __construct(array $hosts, $variantType)
     {
         $this->hosts = $hosts;
-        $this->variantType = $variantType;
+        $this->variant = VariantFactory::createVariant($variantType);
     }
 
     /**
@@ -45,8 +46,7 @@ class LoadBalancer implements LoadBalancerInterface
     public function handleRequest(RequestInterface $request)
     {
         try {
-            $variant = VariantFactory::createVariant($this->variantType);
-            $variant->balanceRequest($request, $this->hosts);
+            $this->variant->balanceRequest($request, $this->hosts);
         }
         catch (\Exception $e) {
             throw new LoadBalancerException($e->getMessage(), $e->getCode());

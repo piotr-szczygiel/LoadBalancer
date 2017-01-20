@@ -22,7 +22,7 @@ class VariantFactory
     public static function createVariant($variantType)
     {
         if (!is_string($variantType)) {
-            throw new InvalidVariantTypeException(sprintf('VariantType needs to be a string, but %s given.', get_class($variantType)));
+            throw new InvalidVariantTypeException(sprintf('VariantType needs to be a string, but %s given.', gettype($variantType)));
         }
 
         switch ($variantType) {

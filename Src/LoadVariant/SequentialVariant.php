@@ -1,6 +1,7 @@
 <?php
 namespace LoadBalancer\LoadVariant;
 
+use LoadBalancer\Exception\VariantException;
 use LoadBalancer\Host\HostInterface;
 use LoadBalancer\Http\RequestInterface;
 
@@ -11,7 +12,14 @@ use LoadBalancer\Http\RequestInterface;
 class SequentialVariant implements LoadVariantInterface
 {
     /**
+     * @var int
+     */
+    private $previousHostIndex = -1;
+
+    /**
      * Assigns given request into proper host.
+     *
+     * @throws VariantException
      *
      * @param RequestInterface $request
      * @param HostInterface[] $hosts
@@ -19,6 +27,27 @@ class SequentialVariant implements LoadVariantInterface
      */
     public function balanceRequest(RequestInterface $request, array $hosts)
     {
-        // TODO: Implement balanceRequest() method.
+        $currentIndex = $this->calculateCurrentIndex(sizeof($hosts));
+        if (!isset($hosts[$currentIndex])) {
+            throw new VariantException(sprintf('Host with index %d doesn\'t exist.', $currentIndex));
+        }
+
+        $hosts[$currentIndex]->handleRequest($request);
+    }
+
+    /**
+     * Calculates an index of the host that will be used in current assigning.
+     *
+     * @param $hostsCount
+     * @return int
+     */
+    private function calculateCurrentIndex($hostsCount)
+    {
+        $currentIndex = $this->previousHostIndex + 1;
+        if ($currentIndex >= $hostsCount) {
+            $currentIndex = 0;
+        }
+
+        return $currentIndex;
     }
 }
