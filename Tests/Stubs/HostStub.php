@@ -16,15 +16,27 @@ class HostStub implements HostInterface
     private $load;
 
     /**
-     * Sets load.
-     *
-     * @param int $load
-     * @return $this
+     * @var string
      */
-    public function setLoad($load)
+    private $name;
+
+    /**
+     * @var int
+     */
+    private $increaseLoadBy;
+
+    /**
+     * HostStub constructor.
+     *
+     * @param string $name
+     * @param int $load
+     * @param int $increaseLoadBy
+     */
+    public function __construct($name, $load, $increaseLoadBy = 50)
     {
+        $this->name = $name;
         $this->load = $load;
-        return $this;
+        $this->increaseLoadBy = $increaseLoadBy;
     }
 
     /**
@@ -45,6 +57,16 @@ class HostStub implements HostInterface
      */
     public function handleRequest(RequestInterface $request)
     {
-        echo 'Request handled.';
+        /** @var RequestStub $request */
+        $request->nameOfHostThatHandledThisRequest = $this->name;
+        $this->increaseLoad();
+    }
+
+    /**
+     * Method increases the load by
+     */
+    private function increaseLoad()
+    {
+        $this->load += $this->increaseLoadBy;
     }
 }

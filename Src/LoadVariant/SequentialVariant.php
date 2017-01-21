@@ -23,7 +23,7 @@ class SequentialVariant implements LoadVariantInterface
      *
      * @param RequestInterface $request
      * @param HostInterface[] $hosts
-     * @return mixed
+     * @return void
      */
     public function balanceRequest(RequestInterface $request, array $hosts)
     {
@@ -33,6 +33,7 @@ class SequentialVariant implements LoadVariantInterface
         }
 
         $hosts[$currentIndex]->handleRequest($request);
+        $this->previousHostIndex = $currentIndex;
     }
 
     /**

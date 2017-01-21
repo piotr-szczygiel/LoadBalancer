@@ -2,7 +2,7 @@
   "autoload": {
     "psr-4": {
       "LoadBalancer\\": "Src/",
-      "LoadBallancer\\Tests\\": "Tests/"
+      "LoadBalancer\\Tests\\": "Tests/"
     }
   }
 }

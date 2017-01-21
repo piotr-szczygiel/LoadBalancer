@@ -15,7 +15,7 @@ interface LoadVariantInterface
      *
      * @param RequestInterface $request
      * @param HostInterface[] $hosts
-     * @return mixed
+     * @return void
      */
     public function balanceRequest(RequestInterface $request, array $hosts);
 }

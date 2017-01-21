@@ -27,11 +27,11 @@ class VariantFactory
 
         switch ($variantType) {
 
-            case VariantType::SEQUENTIAL:
+            case VariantTypeEnum::SEQUENTIAL:
                 return new SequentialVariant();
                 break;
 
-            case VariantType::BALANCED:
+            case VariantTypeEnum::BALANCED:
                 return new BalancedVariant();
                 break;
 

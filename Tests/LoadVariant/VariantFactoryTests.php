@@ -2,7 +2,7 @@
 namespace LoadBalancer\Tests\LoadVariant;
 
 use LoadBalancer\LoadVariant\VariantFactory;
-use LoadBalancer\LoadVariant\VariantType;
+use LoadBalancer\LoadVariant\VariantTypeEnum;
 
 /**
  * Class VariantFactoryTests
@@ -64,8 +64,8 @@ class VariantFactoryTests extends \PHPUnit_Framework_TestCase
     public function correctVariantsProvider()
     {
         return [
-            [VariantType::BALANCED],
-            [VariantType::SEQUENTIAL]
+            [VariantTypeEnum::BALANCED],
+            [VariantTypeEnum::SEQUENTIAL]
         ];
     }
 }

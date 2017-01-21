@@ -2,10 +2,10 @@
 namespace LoadBalancer\LoadVariant;
 
 /**
- * Class VariantEnum
+ * Class VariantTypeEnum
  * @package LoadBalancer\LoadVariant
  */
-abstract class VariantType
+class VariantTypeEnum
 {
     /**
      * @var string
