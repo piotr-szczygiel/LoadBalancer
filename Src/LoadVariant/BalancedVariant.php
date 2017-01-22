@@ -38,11 +38,13 @@ class BalancedVariant implements LoadVariantInterface
 
         foreach ($hosts as $host) {
 
+            // try to find first possible Host that has a load value below defined limit
             if ($host->getLoad() < self::LOAD_LIMIT) {
                 $hostToUse = $host;
                 break;
             }
 
+            // second scenario: try to find Host with lowest load (in case when all Hosts are loaded over defined limit)
             if (is_null($hostWithLowestLoad) || $host->getLoad() < $hostWithLowestLoad->getLoad()) {
                 $hostWithLowestLoad = $host;
             }

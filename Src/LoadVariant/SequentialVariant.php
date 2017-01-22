@@ -12,6 +12,8 @@ use LoadBalancer\Http\RequestInterface;
 class SequentialVariant implements LoadVariantInterface
 {
     /**
+     * Property stores an array index of the Host that was used in previous iteration.
+     *
      * @var int
      */
     private $previousHostIndex = -1;
