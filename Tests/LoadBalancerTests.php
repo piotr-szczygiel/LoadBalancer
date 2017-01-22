@@ -27,7 +27,7 @@ class LoadBalancerTests extends \PHPUnit_Framework_TestCase
         $requests = [];
 
         // When
-        foreach ($testCase->requestsAssigning as $requestName => $hostIndex) {
+        foreach ($testCase->requestsMapper as $requestName => $hostIndex) {
 
             $request = new RequestStub($requestName);
             $loadBalancer->handleRequest($request);
@@ -36,7 +36,7 @@ class LoadBalancerTests extends \PHPUnit_Framework_TestCase
 
         // Then
         foreach ($requests as $request) {
-            $this->assertEquals($testCase->requestsAssigning[$request->name], $request->nameOfHostThatHandledThisRequest);
+            $this->assertEquals($testCase->requestsMapper[$request->name], $request->nameOfHostThatHandledThisRequest);
         }
     }
 
@@ -82,6 +82,16 @@ class LoadBalancerTests extends \PHPUnit_Framework_TestCase
                 VariantTypeEnum::BALANCED,
                 [new HostStub('H0', 0), new HostStub('H1', 0)],
                 ['R0' => 'H0', 'R1' => 'H0', 'R2' => 'H1', 'R3' => 'H1', 'R4' => 'H0', 'R5' => 'H1']
+            )],
+            [new LoadBalancerTestCase(
+                VariantTypeEnum::SEQUENTIAL,
+                [new HostStub('H0', 40)],
+                ['R0' => 'H0', 'R1' => 'H0', 'R2' => 'H0']
+            )],
+            [new LoadBalancerTestCase(
+                VariantTypeEnum::BALANCED,
+                [new HostStub('H0', 40)],
+                ['R0' => 'H0', 'R1' => 'H0', 'R2' => 'H0']
             )]
         ];
     }

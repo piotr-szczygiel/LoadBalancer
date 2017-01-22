@@ -19,6 +19,6 @@ class SequentialVariantTests extends \PHPUnit_Framework_TestCase
         $sequentialVariant = new SequentialVariant();
 
         // When && Then
-        $sequentialVariant->balanceRequest(new RequestStub(), array());
+        $sequentialVariant->balanceRequest(new RequestStub(uniqid()), array());
     }
 }

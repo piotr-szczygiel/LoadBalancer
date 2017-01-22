@@ -19,6 +19,6 @@ class BalancedVariantTests extends \PHPUnit_Framework_TestCase
         $balancedVariant = new BalancedVariant();
 
         // When & Then
-        $balancedVariant->balanceRequest(new RequestStub(), []);
+        $balancedVariant->balanceRequest(new RequestStub(uniqid()), []);
     }
 }

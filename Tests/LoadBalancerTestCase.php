@@ -17,7 +17,7 @@ class LoadBalancerTestCase
     /**
      * @var array
      */
-    public $requestsAssigning;
+    public $requestsMapper;
 
     /**
      * @var string
@@ -29,12 +29,12 @@ class LoadBalancerTestCase
      *
      * @param string $variantType
      * @param HostInterface[] $hosts
-     * @param array $requestsAssigning
+     * @param array $requestsMapper
      */
-    public function __construct($variantType, array $hosts, array $requestsAssigning)
+    public function __construct($variantType, array $hosts, array $requestsMapper)
     {
         $this->hosts = $hosts;
-        $this->requestsAssigning = $requestsAssigning;
+        $this->requestsMapper = $requestsMapper;
         $this->variantType = $variantType;
     }
 }
